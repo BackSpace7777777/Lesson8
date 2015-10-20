@@ -181,6 +181,19 @@ public class StudentGUI extends javax.swing.JFrame {
         NameF.setText(students[currIndex].getName());
         CurrIndexLabel.setText("Current Index: " + currIndex);
     }
+    private void addToStudents()
+    {
+        Student[] temp=new Student[students.length+1];
+        for(int i=0;i<students.length;i++)
+        {
+            temp[i]=students[i];
+        }
+        students=new Student[temp.length];
+        for(int i=0;i<temp.length;i++)
+        {
+            students[i]=temp[i];
+        }
+    }
     private void NameFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NameFActionPerformed
