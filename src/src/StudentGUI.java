@@ -89,6 +89,11 @@ public class StudentGUI extends javax.swing.JFrame {
         Set.setText("Set");
 
         Add.setText("Add");
+        Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddActionPerformed(evt);
+            }
+        });
 
         FarRight.setText(">>");
         FarRight.addActionListener(new java.awt.event.ActionListener() {
@@ -193,6 +198,7 @@ public class StudentGUI extends javax.swing.JFrame {
         {
             students[i]=temp[i];
         }
+        students[students.length-1]=new Student();
     }
     private void NameFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameFActionPerformed
         // TODO add your handling code here:
@@ -225,6 +231,11 @@ public class StudentGUI extends javax.swing.JFrame {
         currIndex=students.length-1;
         refreshFrame();
     }//GEN-LAST:event_FarRightActionPerformed
+
+    private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
+        addToStudents();
+        refreshFrame();
+    }//GEN-LAST:event_AddActionPerformed
     
     /**
      * @param args the command line arguments
