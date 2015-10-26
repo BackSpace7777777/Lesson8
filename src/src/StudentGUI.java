@@ -33,7 +33,6 @@ public class StudentGUI extends javax.swing.JFrame {
         Right = new javax.swing.JButton();
         Left = new javax.swing.JButton();
         Set = new javax.swing.JButton();
-        Add = new javax.swing.JButton();
         FarRight = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,6 +64,8 @@ public class StudentGUI extends javax.swing.JFrame {
             }
         });
 
+        AverageF.setEditable(false);
+
         FarLeft.setText("<<");
         FarLeft.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,11 +88,9 @@ public class StudentGUI extends javax.swing.JFrame {
         });
 
         Set.setText("Set");
-
-        Add.setText("Add");
-        Add.addActionListener(new java.awt.event.ActionListener() {
+        Set.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddActionPerformed(evt);
+                SetActionPerformed(evt);
             }
         });
 
@@ -130,14 +129,12 @@ public class StudentGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Left)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Set)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(CurrIndexLabel)
                                 .addGap(25, 25, 25))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(Add)
+                                .addComponent(Set, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Right)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -172,7 +169,6 @@ public class StudentGUI extends javax.swing.JFrame {
                     .addComponent(Right)
                     .addComponent(Left)
                     .addComponent(Set)
-                    .addComponent(Add)
                     .addComponent(FarRight))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(CurrIndexLabel)
@@ -184,6 +180,10 @@ public class StudentGUI extends javax.swing.JFrame {
     private void refreshFrame()
     {
         NameF.setText(students[currIndex].getName());
+        AverageF.setText("" + students[currIndex].getAverage());
+        M1F.setText("" + students[currIndex].getMark(1));
+        M2F.setText("" + students[currIndex].getMark(2));
+        M3F.setText("" + students[currIndex].getMark(3));
         CurrIndexLabel.setText("Current Index: " + currIndex);
     }
     private void addToStudents()
@@ -222,7 +222,10 @@ public class StudentGUI extends javax.swing.JFrame {
 
     private void RightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RightActionPerformed
         if(currIndex==(students.length-1))
+        {
+            addToStudents();
             currIndex=students.length-1;
+        }
         else currIndex++;
         refreshFrame();
     }//GEN-LAST:event_RightActionPerformed
@@ -232,10 +235,17 @@ public class StudentGUI extends javax.swing.JFrame {
         refreshFrame();
     }//GEN-LAST:event_FarRightActionPerformed
 
-    private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
-        addToStudents();
-        refreshFrame();
-    }//GEN-LAST:event_AddActionPerformed
+    private void SetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetActionPerformed
+        try
+        {
+            students[currIndex].setName(NameF.getText());
+            students[currIndex].setMark(1, Integer.parseInt(M1F.getText()));
+            students[currIndex].setMark(2, Integer.parseInt(M2F.getText()));
+            students[currIndex].setMark(3, Integer.parseInt(M3F.getText()));
+            refreshFrame();
+        }
+        catch(NumberFormatException ex){System.out.println(ex);}
+    }//GEN-LAST:event_SetActionPerformed
     
     /**
      * @param args the command line arguments
@@ -273,7 +283,6 @@ public class StudentGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Add;
     private javax.swing.JTextField AverageF;
     private javax.swing.JLabel CurrIndexLabel;
     private javax.swing.JButton FarLeft;

@@ -62,15 +62,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Left" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="Set" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="CurrIndexLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="Add" min="-2" max="-2" attributes="0"/>
+                              <Component id="Set" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="Right" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -116,7 +114,6 @@
                   <Component id="Right" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Left" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Set" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Add" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="FarRight" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="23" max="32767" attributes="0"/>
@@ -169,6 +166,9 @@
     <Component class="javax.swing.JTextField" name="M3F">
     </Component>
     <Component class="javax.swing.JTextField" name="AverageF">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="FarLeft">
       <Properties>
@@ -198,13 +198,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Set"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="Add">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Add"/>
-      </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SetActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="FarRight">
