@@ -34,6 +34,7 @@ public class StudentGUI extends javax.swing.JFrame {
         Left = new javax.swing.JButton();
         Set = new javax.swing.JButton();
         FarRight = new javax.swing.JButton();
+        DiceButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Student GUI");
@@ -101,6 +102,13 @@ public class StudentGUI extends javax.swing.JFrame {
             }
         });
 
+        DiceButton.setText("Dice");
+        DiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DiceButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,9 +133,12 @@ public class StudentGUI extends javax.swing.JFrame {
                             .addComponent(AverageF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(19, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(FarLeft)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Left)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(FarLeft)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Left))
+                            .addComponent(DiceButton))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -170,8 +181,10 @@ public class StudentGUI extends javax.swing.JFrame {
                     .addComponent(Left)
                     .addComponent(Set)
                     .addComponent(FarRight))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(CurrIndexLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CurrIndexLabel)
+                    .addComponent(DiceButton))
                 .addContainerGap())
         );
 
@@ -246,6 +259,12 @@ public class StudentGUI extends javax.swing.JFrame {
         }
         catch(NumberFormatException ex){System.out.println(ex);}
     }//GEN-LAST:event_SetActionPerformed
+
+    private void DiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiceButtonActionPerformed
+        Dice d=new Dice(this);
+        this.setVisible(false);
+        d.show(true);
+    }//GEN-LAST:event_DiceButtonActionPerformed
     
     /**
      * @param args the command line arguments
@@ -285,6 +304,7 @@ public class StudentGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AverageF;
     private javax.swing.JLabel CurrIndexLabel;
+    private javax.swing.JButton DiceButton;
     private javax.swing.JButton FarLeft;
     private javax.swing.JButton FarRight;
     private javax.swing.JButton Left;
