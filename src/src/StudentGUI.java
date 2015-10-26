@@ -8,6 +8,7 @@ package src;
 public class StudentGUI extends javax.swing.JFrame {
     private Student[] students=new Student[2];
     private int currIndex=0;
+    private Dice d=new Dice(this);
     public StudentGUI() {
         initComponents();
         students[0]=new Student();
@@ -197,7 +198,7 @@ public class StudentGUI extends javax.swing.JFrame {
         M1F.setText("" + students[currIndex].getMark(1));
         M2F.setText("" + students[currIndex].getMark(2));
         M3F.setText("" + students[currIndex].getMark(3));
-        CurrIndexLabel.setText("Current Index: " + currIndex);
+        CurrIndexLabel.setText("Current Index: " + (currIndex+1));
     }
     private void addToStudents()
     {
@@ -261,7 +262,6 @@ public class StudentGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_SetActionPerformed
 
     private void DiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiceButtonActionPerformed
-        Dice d=new Dice(this);
         this.setVisible(false);
         d.show(true);
     }//GEN-LAST:event_DiceButtonActionPerformed
