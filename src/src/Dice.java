@@ -17,7 +17,7 @@ public class Dice {
     private JPanel panel;
     private ImageIcon[] images=new ImageIcon[6];
     private JButton menu,roll;
-    private int picture1=0,picture2=0;
+    private int picture1=0,picture2=0,money=100;
     private boolean canUseThread=false;
     private Color c;
     private Thread diceSelection;
