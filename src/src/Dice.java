@@ -22,7 +22,7 @@ public class Dice {
     private JLabel moneyL;
     private JTextArea out;
     private String text="";
-    private int picture1=0,picture2=0,money=100,rolls=0;
+    private int picture1=0,picture2=0,money=100,rolls=0,firstRollValue;
     private boolean canUseThread=false,doneRoll=false;
     private Color c;
     private Thread diceSelection;
@@ -42,16 +42,28 @@ public class Dice {
         frame.setDefaultCloseOperation(3);
         frame.setResizable(false);
         frame.setLayout(null);
+        moneyL=new JLabel();
+        moneyL.setText("You have $" + money);
+        moneyL.setBounds(frame.getWidth()-100,frame.getHeight()-65,100,30);
+        out=new JTextArea();
+        out.setBounds(5,88+20,260,95);
+        out.setEditable(false);
         roll=new JButton();
         roll.setText("Roll");
-        roll.setBounds(5,5+88*2,150,30);
+        roll.setBounds(5,frame.getHeight()-95,150,30);
         roll.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(canUseThread)
                 {
                     threadReset();
-                    diceSelection.start();
                     rolls++;
+                    out.setText("");
+                    if(money>4)
+                    {
+                        money-=5;
+                        moneyL.setText("You have $" + money);
+                        diceSelection.start();
+                    }
                 }
             }
         });
@@ -78,6 +90,8 @@ public class Dice {
             }
         };
         panel.setBounds(0,0,88*2+10,88+10);
+        frame.add(out);
+        frame.add(moneyL);
         frame.add(roll);
         frame.add(panel);
         frame.add(menu);
@@ -87,13 +101,14 @@ public class Dice {
     {
         diceSelection=new Thread(new Runnable() {
             public void run() {
+                text="";
                 doneRoll=false;
                 canUseThread=false;
                 Random r=new Random();
                 int times=0,t2=1;
-                while(times<75 || times>150)
+                while(times<75 || times>125)
                 {
-                    times=r.nextInt(150-75)+75;
+                    times=r.nextInt(125-75)+75;
                 }
                 while(times>0)
                 {
@@ -101,7 +116,7 @@ public class Dice {
                     picture2=r.nextInt(6);
                     c=new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
                     times--;
-                    if(times<15)t2+=30;
+                    if(times<15)t2+=25;
                     try {
                         Thread.sleep(50+t2);
                     } catch (InterruptedException ex) {}
@@ -109,15 +124,48 @@ public class Dice {
                 doneRoll=true;
                 if(rolls==1)
                 {
-                    if(picture1+1+picture2+1==7)
+                    if((picture1+picture2+2==7) || (picture1+picture2+2==11))
                     {
-                        
+                        text+="You have rolled a " + (picture1+picture2+2) + '\n';
+                        text+="You have won!";
+                        money=100;
+                    }
+                    else if((picture1+picture2+2==2)||(picture1+picture2+2==3)||(picture1+picture2+2==10))
+                    {
+                        text+="You have rolled a " + (picture1+picture2+2) + '\n';
+                        text+="You have lost, try again?";
+                        rolls=0;
+                        money=100;
+                    }
+                    else
+                    {
+                        text+="Your winning number is " + (picture1+picture2+2);
+                        firstRollValue=(picture1+picture2+2);
                     }
                 }
                 else
                 {
-                    
+                    if(picture1+picture2+2==7)
+                    {
+                        text+="You have rolled a " + (picture1+picture2+2) + '\n';
+                        text+="You have lost, try again?";
+                        rolls=0;
+                        money=100;
+                    }
+                    else if(picture1+picture2+2==firstRollValue)
+                    {
+                        text+="You have rolled a " + firstRollValue + '\n';
+                        text+="You have won!";
+                        money+=15;
+                    }
+                    else
+                    {
+                        text+="You have rolled a " + (picture1+picture2+2) + '\n';
+                        text+="You have won nothing, roll again";
+                    }
                 }
+                out.setText(text);
+                moneyL.setText("You have $" + money);
                 canUseThread=true;
             }
         });
