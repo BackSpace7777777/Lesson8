@@ -103,15 +103,19 @@ public class Dice {
                 doneRoll=false;
                 canUseThread=false;
                 Random r=new Random();
-                int times=0,t2=1;
+                int times=0,t2=1,p1t=r.nextInt(6),p2t=r.nextInt(6);
                 while(times<75 || times>125)
                 {
                     times=r.nextInt(125-75)+75;
                 }
                 while(times>0)
                 {
-                    picture1=r.nextInt(6);
-                    picture2=r.nextInt(6);
+                    while(picture1==p1t)
+                        picture1=r.nextInt(6);
+                    p1t=picture1;
+                    while(picture2==p2t)
+                        picture2=r.nextInt(6);
+                    p2t=picture2;
                     c=new Color(r.nextInt(255),r.nextInt(255),r.nextInt(255));
                     times--;
                     if(times<15)t2+=25;
